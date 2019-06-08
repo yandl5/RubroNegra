@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1560011449 source:c:\users\yan\documents\edb2\rubronegra\rubronegra\main.cpp
+	<iostream>
+	"node.h"
+
+1560011722 c:\users\yan\documents\edb2\rubronegra\rubronegra\node.h
+
+1560011743 source:c:\users\yan\documents\edb2\rubronegra\rubronegra\node.cpp
+	"node.h"
+
