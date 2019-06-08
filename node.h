@@ -1,5 +1,6 @@
 #ifndef NODE
 #define NODE
+#include <iostream>
 using namespace std;
 class Node
 {
@@ -9,10 +10,13 @@ private:
     Node* left;
     Node* father;
     char color; //r ou b
+    //construtor de nodes externos
     Node();
     bool externo;
 public:
+    //construtor padrão
     Node(int valor);
+    //metodos gets and seters
     int getValor();
     Node* getRight();
     Node* getLeft();
@@ -25,6 +29,10 @@ public:
     void setFather(Node* node);
     void setColor(char color);
     void setExterno(bool externo);
+
+    //Funções avô e tio do node em questão
+    Node* grandFather();
+    Node* uncle();
 };
 
 #endif // NODE
