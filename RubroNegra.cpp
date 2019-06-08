@@ -74,6 +74,56 @@ void RubroNegra::inserir(int valor)
         //aumentar quantidade de elementos da árvore
         this->quantidadeElementos++;
     }
-    return;
+    //chamaremos o metodo de validacao para testar se essa insercao eh valida
+    this->metodoValidacao(inserir);
 }
+void RubroNegra::metodoValidacao(Node* inserido)
+{
+    //agora é importante testarmos se a árvore ficou balanceada de fato
+    //já que o novo node é rubro, o pai deve ser negro, iremos testar
+    if(inserido->getFather()->getColor()=='b')
+    {
+        return;
+    }
+    //agora verificamos se o o tio e o pai tem cor rubra, caso verdade, basta alterarmos
+    //a cor dos dois para preto e a cor do avô para rubro
+    else if(inserido->uncle()!=nullptr && inserido->uncle()->getColor()=='r')
+    {
+        inserido->getFather()->setColor('b');
+        inserido->uncle()->setColor('b');
+        if(inserido->grandFather()==this->root)
+        {
+            inserido->grandFather()->setColor('b');
+        }
+        else
+        {
+            inserido->grandFather()->setColor('r');
+        }
+        return;
+    }
+    //Caso não seja possível nenhuma das opções acima, se faz necessário o uso de rotações
+    //nos casos seguintes
+    if((inserido == inserido->getFather()->getRight())&&(inserido->getFather()==inserido->grandFather()->getLeft()))
+    {
+        this->rotacaoEsquerda(inserido->getFather());
 
+    }
+
+
+}
+void RubroNegra::rotacaoDireita(Node* node)
+{
+
+}
+void RubroNegra::rotacaoEsquerda(Node* node)
+{
+
+}
+void RubroNegra::rotacaoDuplaD(Node* node)
+{
+
+}
+void RubroNegra::rotacaoDuplaE(Node* node)
+{
+
+}
