@@ -21,11 +21,13 @@ public:
     void inserir(int valor);
     void rotacaoDireita(Node* node);
     void rotacaoEsquerda(Node* node);
-    void rotacaoDuplaD(Node* node);
-    void rotacaoDuplaE(Node* node);
     void metodoValidacao(Node* inserido);
     //método de remorção
 
+    //método de visita simetrica
+    void simetrica(Node* a);
+    //altura arvore
+    int heightTree(Node* r);
 };
 
 #endif // RUBRONEGRA

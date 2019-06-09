@@ -32,7 +32,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="RubroNegra.cpp" />
+		<Unit filename="RubroNegra.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="node.cpp" />
+		<Unit filename="node.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
