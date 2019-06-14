@@ -79,112 +79,117 @@ void RubroNegra::inserir(int valor)
 }
 void RubroNegra::metodoValidacao(Node* inserido)
 {
-    //agora é importante testarmos se a árvore ficou balanceada de fato
-    //já que o novo node é rubro, o pai deve ser negro, iremos testar
-    if(inserido->getFather()->getColor()=='b')
+    bool stop = false;
+    while(inserido->getFather()->getColor()=='r' && stop != true)
     {
-        return;
-    }
-    //agora verificamos se o o tio e o pai tem cor rubra, caso verdade, basta alterarmos
-    //a cor dos dois para preto e a cor do avô para rubro
-    else if(inserido->uncle()!=nullptr && inserido->uncle()->getColor()=='r')
-    {
-        inserido->getFather()->setColor('b');
-        inserido->uncle()->setColor('b');
-        if(inserido->grandFather()==this->root)
+        Node* avo = inserido->grandFather();
+        Node* tio = inserido->uncle();
+        //O tio direito é rubro
+        if(inserido->getFather()==avo->getLeft())
         {
-            inserido->grandFather()->setColor('b');
+            if(tio->getColor()=='r')
+            {
+                inserido->getFather()->setColor('b');
+                tio->setColor('b');
+                avo->setColor('r');
+                Node* inserido = avo;
+            }
+            else
+            {
+                if(inserido==inserido->getFather()->getRight())
+                {
+                    inserido = inserido->getFather();
+                    this->rotacaoEsquerda(inserido);
+                }
+                inserido->getFather()->setColor('b');
+                avo->setColor('r');
+                this->rotacaoDireita(avo);
+            }
         }
         else
         {
-            inserido->grandFather()->setColor('r');
+            Node* avo = inserido->grandFather();
+            Node* tio = inserido->uncle();
+            if(tio->getColor()=='r')
+            {
+                inserido->getFather()->setColor('b');
+                tio->setColor('b');
+                avo->setColor('r');
+                Node* inserido = avo;
+            }
+            else
+            {
+                if(inserido==inserido->getFather()->getLeft())
+                {
+                    inserido = inserido->getFather();
+                    this->rotacaoDireita(inserido);
+                }
+                inserido->getFather()->setColor('b');
+                avo->setColor('r');
+                this->rotacaoEsquerda(avo);
+            }
         }
-        return;
+        if(inserido==this->getRoot())
+            stop=true;
     }
-    //Caso não seja possível nenhuma das opções acima, se faz necessário o uso de rotações
-    //nos casos seguintes
-    if((inserido == inserido->getFather()->getRight())&&(inserido->getFather()==inserido->grandFather()->getLeft()))
-    {
-        this->rotacaoEsquerda(inserido->getFather());
-        inserido = inserido->getLeft();
-    }
-    else if((inserido == inserido->getFather()->getLeft())&&(inserido->getFather()==inserido->grandFather()->getRight()))
-    {
-        this->rotacaoDireita(inserido->getFather());
-        inserido = inserido->getRight();
-    }
-    //agr vamos verificar a necessidade de se fazer uma rotação dupla
-    //se chegamos até aqui podemos assumir como necessário esse passo
-    inserido->getFather()->setColor('b');
-    inserido->grandFather()->setColor('r');
-    if((inserido == inserido->getFather()->getLeft())&&(inserido->getFather()==inserido->grandFather()->getLeft()))
-    {
-        this->rotacaoDireita(inserido->grandFather());
-    }
-    else
-    {
-        this->rotacaoEsquerda(inserido->grandFather());
-    }
-    this->metodoValidacao(inserido->grandFather());
+    this->getRoot()->setColor('b');
 }
 //Rotacao direita
 void RubroNegra::rotacaoDireita(Node* node)
 {
-
-    Node* aux2 = node->getFather();
-    Node* aux3 = node->getLeft();
-    //setando o pai de node
-    if(aux2==nullptr)
+    Node* aux = node->getLeft();
+    node->setLeft(aux->getRight());
+    if(aux->getRight()->getExterno()!=true)
     {
-        this->setRoot(aux3);
+        aux->getRight()->setFather(node);
     }
-    else if(aux2->getRight()==node)
+    aux->setFather(node->getFather());
+    if(node->getFather()==nullptr)
     {
-        aux2->setRight(aux3);
+        this->setRoot(aux);
+    }
+    else if(node==node->getFather()->getRight())
+    {
+        node->getFather()->setRight(aux);
     }
     else
     {
-        aux2->setLeft(aux3);
+        node->getFather()->setLeft(aux);
     }
-    //setando o pai do node filho
-    aux3->setFather(aux2);
-    //setar a esquerda do node e o father
-    node->setLeft(aux3->getRight());
-    node->setFather(aux3);
-    //setar a esquerda do node filho
-    aux3->setRight(node);
+    aux->setRight(node);
+    node->setFather(aux);
+
 }
 //recebendo node pai vamos rotaciona o mesmo a esquerda
 void RubroNegra::rotacaoEsquerda(Node* node)
 {
-    Node* aux2 = node->getFather();
-    Node* aux3 = node->getRight();
-    //setando o pai de node
-    if(aux2==nullptr)
+    Node* aux = node->getRight();
+    node->setRight(aux->getLeft());
+    if(aux->getLeft()->getExterno()!=true)
     {
-        this->setRoot(aux3);
+        aux->getLeft()->setFather(node);
     }
-    else if(aux2->getRight() == node)
+    aux->setFather(node->getFather());
+    if(node->getFather()==nullptr)
     {
-        aux2->setRight(aux3);
+        this->setRoot(aux);
+    }
+    else if(node==node->getFather()->getLeft())
+    {
+        node->getFather()->setLeft(aux);
     }
     else
     {
-        aux2->setLeft(aux3);
+        node->getFather()->setRight(aux);
     }
-    //setando pai do node filho
-    aux3->setFather(aux2);
-    //setar a direita do node e o father
-    node->setRight(aux3->getLeft());
-    node->setFather(aux3);
-    //setar a esquerda do node filho
-    aux3->setLeft(node);
+    aux->setLeft(node);
+    node->setFather(aux);
 }
 void RubroNegra::simetrica(Node* a)
 {
     if(a->getExterno()!=true)
     {
-        cout<<a->getValor()<<" ";
+        cout<<a->getValor()<<" "<<a->getColor()<<"-";
         simetrica(a->getLeft());
         simetrica(a->getRight());
     }
