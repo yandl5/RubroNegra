@@ -99,4 +99,14 @@ Node* Node::uncle()
         return aux->getLeft();
     }
 }
+Node& Node::operator=(Node const &t)
+{
+        valor=t.valor;
+        right=t.right;
+        left=t.left;
+        father=t.father;
+        color=t.color;
+        externo=t.externo;
+		return *this;
+}
 

@@ -1,18 +1,18 @@
 # depslib dependency file v1.0
-1560542234 source:c:\users\yan\documents\edb2\rubronegra\rubronegra\main.cpp
+1560544889 source:c:\users\yan\documents\edb2\rubronegra\rubronegra\main.cpp
 	<iostream>
 	"node.h"
 	"RubroNegra.h"
 
-1560025448 c:\users\yan\documents\edb2\rubronegra\rubronegra\node.h
+1560548982 c:\users\yan\documents\edb2\rubronegra\rubronegra\node.h
 	<iostream>
 
-1560021438 source:c:\users\yan\documents\edb2\rubronegra\rubronegra\node.cpp
+1560545199 source:c:\users\yan\documents\edb2\rubronegra\rubronegra\node.cpp
 	"node.h"
 
-1560541339 source:c:\users\yan\documents\edb2\rubronegra\rubronegra\rubronegra.cpp
+1560548278 source:c:\users\yan\documents\edb2\rubronegra\rubronegra\rubronegra.cpp
 	"RubroNegra.h"
 
-1560111900 c:\users\yan\documents\edb2\rubronegra\rubronegra\rubronegra.h
+1560548317 c:\users\yan\documents\edb2\rubronegra\rubronegra\rubronegra.h
 	"node.h"
 

@@ -21,6 +21,14 @@ int main()
     a->inserir(103);
     a->inserir(105);
     a->inserir(152);
+    a->inserir(137);
+    a->inserir(134);
+    a->inserir(135);
+    a->inserir(136);
+    a->inserir(148);
+    a->inserir(83);
+    a->inserir(198);
+    a->inserir(199);
 
     a->simetrica(a->getRoot());
     cout<<endl;

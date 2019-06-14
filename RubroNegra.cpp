@@ -77,10 +77,9 @@ void RubroNegra::inserir(int valor)
     //chamaremos o metodo de validacao para testar se essa insercao eh valida
     this->metodoValidacao(inserir);
 }
-void RubroNegra::metodoValidacao(Node* inserido)
+void RubroNegra::metodoValidacao(Node* &inserido)
 {
-    bool stop = false;
-    while(inserido->getFather()->getColor()=='r' && stop != true)
+    while(inserido->getFather()->getColor()=='r')
     {
         Node* avo = inserido->grandFather();
         Node* tio = inserido->uncle();
@@ -103,13 +102,11 @@ void RubroNegra::metodoValidacao(Node* inserido)
                 }
                 inserido->getFather()->setColor('b');
                 avo->setColor('r');
-                this->rotacaoDireita(avo);
+                this->rotacaoDireita(inserido->grandFather());
             }
         }
         else
         {
-            Node* avo = inserido->grandFather();
-            Node* tio = inserido->uncle();
             if(tio->getColor()=='r')
             {
                 inserido->getFather()->setColor('b');
@@ -119,18 +116,16 @@ void RubroNegra::metodoValidacao(Node* inserido)
             }
             else
             {
-                if(inserido==inserido->getFather()->getLeft())
+                if(inserido ==inserido->getFather()->getLeft())
                 {
                     inserido = inserido->getFather();
                     this->rotacaoDireita(inserido);
                 }
                 inserido->getFather()->setColor('b');
                 avo->setColor('r');
-                this->rotacaoEsquerda(avo);
+                this->rotacaoEsquerda(inserido->grandFather());
             }
         }
-        if(inserido==this->getRoot())
-            stop=true;
     }
     this->getRoot()->setColor('b');
 }

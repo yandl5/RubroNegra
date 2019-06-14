@@ -21,7 +21,7 @@ public:
     void inserir(int valor);
     void rotacaoDireita(Node* node);
     void rotacaoEsquerda(Node* node);
-    void metodoValidacao(Node* inserido);
+    void metodoValidacao(Node* &inserido);
     //método de remorção
 
     //método de visita simetrica

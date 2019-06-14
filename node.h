@@ -33,6 +33,8 @@ public:
     //Funções avô e tio do node em questão
     Node* grandFather();
     Node* uncle();
+    //sobrecarga do igual '='
+    Node& operator=(Node const &t);
 };
 
 #endif // NODE
